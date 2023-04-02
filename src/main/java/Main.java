@@ -8,8 +8,8 @@ public class Main {
     public static void exercise2_1() {
         System.out.println("\nExercise 2-1");
         System.out.println("\nSearch in the same row 2-1");
-        Rover rover = new Rover();
-        Map map = new Map();
+        Map map = new Map(8);
+        Rover rover = new Rover(map);
 
 
         rover.setStart(2, 1);
@@ -17,18 +17,18 @@ public class Main {
 
         map.print();
 
-        boolean movementResult;
+        char movementResult;
         do {
-            movementResult = rover.move(Rover.RIGHT, map);
+            movementResult = rover.moveRow();
             map.print();
-        } while (!rover.hasReachedDestination() && movementResult);
+        } while (!rover.hasReachedDestination() && movementResult != Rover.INVALID);
 
         displayFinalResult(rover);
     }
 
     public static void exercise2_2() {
-        Rover rover = new Rover();
-        Map map = new Map();
+        Map map = new Map(8);
+        Rover rover = new Rover(map);
 
         System.out.println("\nExercise 2-2");
 
@@ -37,9 +37,8 @@ public class Main {
 
         map.print();
 
-        boolean movementResult;
         do {
-            movementResult = rover.move(Rover.UP, map) || rover.move(Rover.LEFT, map);
+            rover.moveMatrix();
             map.print();
         } while (!rover.hasReachedDestination());
 
@@ -47,8 +46,8 @@ public class Main {
     }
 
     public static void exercise2_3() {
-        Rover rover = new Rover();
-        Map map = new Map();
+        Map map = new Map(8);
+        Rover rover = new Rover(map);
 
         System.out.println("\nExercise 2-3");
 
@@ -68,9 +67,8 @@ public class Main {
 
         map.print();
 
-        boolean movementResult;
         do {
-            movementResult = rover.move(Rover.RIGHT, map) || rover.move(Rover.DOWN, map);
+            rover.moveMatrixBlocking();
             map.print();
         } while (!rover.hasReachedDestination());
 
